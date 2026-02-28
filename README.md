@@ -8,46 +8,22 @@ This project demonstrates cloud‑native architecture, observability, and scalab
 
 ## 🏗 Architecture
 
-## 🏗 Architecture
+```text
+Client
+  |  POST /shorten        GET /{code}
+  v
+API Gateway (REST)
+  |                 \
+  v                  v
+Lambda shortenUrl   Lambda redirectUrl
+  | PutItem           | GetItem + Update clicks
+  v                   v
+DynamoDB: ShortUrls (ttl enabled)
+  |
+  v
+302 redirect (Location: longUrl)
 
-```mermaid
-graph TB
-  subgraph Client
-    C["Client / Browser"]
-  end
-
-  subgraph API["Amazon API Gateway (REST)"]
-    APIGW["POST /shorten | GET /{code}"]
-  end
-
-  subgraph Compute["AWS Lambda"]
-    L1["shortenUrl: generate short code + store mapping"]
-    L2["redirectUrl: retrieve URL + increment clicks + return 302"]
-  end
-
-  subgraph Data["Amazon DynamoDB"]
-    DB[("ShortUrls table (PK: shortCode)")]
-  end
-
-  subgraph Observability["Amazon CloudWatch"]
-    CW["Logs & Monitoring"]
-  end
-
-  C -->|POST /shorten| APIGW
-  APIGW --> L1
-  L1 -->|PutItem| DB
-  L1 --> APIGW
-  APIGW --> C
-
-  C -->|GET /{code}| APIGW
-  APIGW --> L2
-  L2 -->|GetItem + Update clicks| DB
-  L2 -->|302 Location| APIGW
-  APIGW --> C
-
-  APIGW -. Access Logs .-> CW
-  L1 -. Logs .-> CW
-  L2 -. Logs .-> CW
+Logs: API Gateway + Lambda -> CloudWatch Logs
 ```
 
 ---
