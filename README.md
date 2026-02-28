@@ -86,13 +86,13 @@ Returns:
 ### Create short URL
 
 ```bash
-curl -X POST "https://YOUR_API_ID.execute-api.us-east-1.amazonaws.com/prod/shorten"   -H "Content-Type: application/json"   --data-raw '{"url":"https://google.com"}'
+curl -X POST "https://API_ID.execute-api.us-east-1.amazonaws.com/prod/shorten"   -H "Content-Type: application/json"   --data-raw '{"url":"https://google.com"}'
 ```
 
 ### Redirect
 
 ```bash
-curl -i "https://YOUR_API_ID.execute-api.us-east-1.amazonaws.com/prod/p7BHUw"
+curl -i "https://API_ID.execute-api.us-east-1.amazonaws.com/prod/p7BHUw"
 ```
 
 ---
@@ -151,6 +151,24 @@ Lambda execution logs are stored in CloudWatch for debugging and tracing.
 - Terraform IaC
 
 ---
+
+## 📸 Console & Runtime Proof
+
+### API Gateway Routes
+
+![API Gateway](docs/api-gateway.png)
+
+### DynamoDB Table & Items
+
+![DynamoDB](docs/dynamodb-items.png)
+
+### CloudWatch Access Logs
+
+![CloudWatch Logs](docs/cloudwatch-access-logs.png)
+
+### cURL Test (Create + Redirect)
+
+![Curl Test](docs/curl-demo.png)
 
 ## 👩🏽‍💻 Author
 
