@@ -12,7 +12,7 @@ This project demonstrates cloud‑native architecture, observability, and scalab
 Client
   |  POST /shorten        GET /{code}
   v
-API Gateway (REST)
+API Gateway (HTTP)
   |                 \
   v                  v
 Lambda shortenUrl   Lambda redirectUrl
@@ -23,7 +23,7 @@ DynamoDB: ShortUrls (ttl enabled)
   v
 302 redirect (Location: longUrl)
 
-Logs: API Gateway + Lambda -> CloudWatch Logs
+Logs: API Gateway -> CloudWatch Logs
 ```
 
 ---
@@ -42,7 +42,7 @@ Logs: API Gateway + Lambda -> CloudWatch Logs
 
 ## 🧰 Tech Stack
 
-- Amazon API Gateway (REST)
+- Amazon API Gateway (HTTP API)
 - AWS Lambda (Python)
 - Amazon DynamoDB
 - Amazon CloudWatch Logs
@@ -97,6 +97,17 @@ curl -i "https://API_ID.execute-api.us-east-1.amazonaws.com/prod/p7BHUw"
 
 ---
 
+## Response:
+
+```bash
+HTTP/2 302
+Location: https://google.com
+```
+
+### cURL Test (Create + Redirect)
+
+![Curl Test](docs/curl-demo.png)
+
 ## 🗄 DynamoDB Schema
 
 **Table:** `ShortUrls`
@@ -125,9 +136,10 @@ CloudWatch logs include:
 - latency
 - client IP
 
-### Lambda Logs
+### CloudWatch Access Logs
 
-Lambda execution logs are stored in CloudWatch for debugging and tracing.
+![CloudWatch Logs](docs/cloudwatch-access-logs.png)
+![CloudWatch Logs](docs/cloudwatch-access-logs-2.png)
 
 ---
 
@@ -151,20 +163,6 @@ Lambda execution logs are stored in CloudWatch for debugging and tracing.
 - Terraform IaC
 
 ---
-
-## 📸 Console & Runtime Proof
-
-### DynamoDB Table & Items
-
-![DynamoDB](docs/dynamodb-items.png)
-
-### CloudWatch Access Logs
-
-![CloudWatch Logs](docs/cloudwatch-access-logs.png)
-
-### cURL Test (Create + Redirect)
-
-![Curl Test](docs/curl-demo.png)
 
 ## 👩🏽‍💻 Author
 
