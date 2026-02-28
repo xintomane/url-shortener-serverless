@@ -154,10 +154,6 @@ Lambda execution logs are stored in CloudWatch for debugging and tracing.
 
 ## 📸 Console & Runtime Proof
 
-### API Gateway Routes
-
-![API Gateway](docs/api-gateway.png)
-
 ### DynamoDB Table & Items
 
 ![DynamoDB](docs/dynamodb-items.png)
