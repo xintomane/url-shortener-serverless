@@ -8,42 +8,42 @@ This project demonstrates cloud‑native architecture, observability, and scalab
 
 ````mermaid
 graph TB
-    subgraph Client
-        C[Client / Browser]
-    end
+  subgraph Client
+    C["Client / Browser"]
+  end
 
-    subgraph API["Amazon API Gateway (REST)"]
-        APIGW[POST /shorten<br/>GET /{code}]
-    end
+  subgraph API["Amazon API Gateway (REST)"]
+    APIGW["POST /shorten | GET /{code}"]
+  end
 
-    subgraph Compute["AWS Lambda"]
-        L1[shortenUrl<br/>Generate short code<br/>Store mapping]
-        L2[redirectUrl<br/>Retrieve URL<br/>Increment clicks<br/>Return 302]
-    end
+  subgraph Compute["AWS Lambda"]
+    L1["shortenUrl: generate short code + store mapping"]
+    L2["redirectUrl: retrieve URL + increment clicks + return 302"]
+  end
 
-    subgraph Data["Amazon DynamoDB"]
-        DB[(ShortUrls Table<br/>PK: shortCode<br/>Attributes:<br/>longUrl, createdAt,<br/>clicks, ttl)]
-    end
+  subgraph Data["Amazon DynamoDB"]
+    DB[("ShortUrls table (PK: shortCode)")]
+  end
 
-    subgraph Observability["Amazon CloudWatch"]
-        CW[Logs & Monitoring]
-    end
+  subgraph Observability["Amazon CloudWatch"]
+    CW["Logs & Monitoring"]
+  end
 
-    C -->|POST /shorten| APIGW
-    APIGW --> L1
-    L1 -->|PutItem| DB
-    L1 --> APIGW
-    APIGW --> C
+  C -->|POST /shorten| APIGW
+  APIGW --> L1
+  L1 -->|PutItem| DB
+  L1 --> APIGW
+  APIGW --> C
 
-    C -->|GET /{code}| APIGW
-    APIGW --> L2
-    L2 -->|GetItem + Update clicks| DB
-    L2 -->|302 redirect| APIGW
-    APIGW --> C
+  C -->|GET /{code}| APIGW
+  APIGW --> L2
+  L2 -->|GetItem + Update clicks| DB
+  L2 -->|302 Location| APIGW
+  APIGW --> C
 
-    APIGW -. Access Logs .-> CW
-    L1 -. Logs .-> CW
-    L2 -. Logs .-> CW
+  APIGW -. Access Logs .-> CW
+  L1 -. Logs .-> CW
+  L2 -. Logs .-> CW
 
 ---
 
