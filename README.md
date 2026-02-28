@@ -8,6 +8,9 @@ This project demonstrates cloud‑native architecture, observability, and scalab
 
 ## 🏗 Architecture
 
+````md
+## 🏗 Architecture
+
 ```mermaid
 graph TB
     subgraph Client
@@ -47,18 +50,19 @@ graph TB
     L1 -. Logs .-> CW
     L2 -. Logs .-> CW
 ```
+````
 
 ---
 
 ## 🚀 Features
 
-- Serverless architecture  
-- URL shortening & redirection  
-- Click analytics (atomic counter)  
-- DynamoDB TTL for automatic expiration  
-- API Gateway access logging  
-- CloudWatch observability  
-- High availability & auto scaling  
+- Serverless architecture
+- URL shortening & redirection
+- Click analytics (atomic counter)
+- DynamoDB TTL for automatic expiration
+- API Gateway access logging
+- CloudWatch observability
+- High availability & auto scaling
 
 ---
 
@@ -75,21 +79,25 @@ graph TB
 ## 🔌 API EndPoints
 
 ### Create short URL
+
 **POST** `/shorten`
 
 **Request**
+
 ```json
-{"url":"https://google.com"}
+{ "url": "https://google.com" }
 ```
 
 **Response**
+
 ```json
-{"shortCode":"p7BHUw"}
+{ "shortCode": "p7BHUw" }
 ```
 
 ---
 
 ### Redirect
+
 **GET** `/{code}`
 
 Returns:
@@ -121,13 +129,13 @@ curl -i "https://YOUR_API_ID.execute-api.us-east-1.amazonaws.com/prod/p7BHUw"
 
 **Table:** `ShortUrls`
 
-| Attribute | Type | Description |
-|----------|------|------------|
-| shortCode | String (PK) | unique short link |
-| longUrl | String | original URL |
-| createdAt | String | timestamp |
-| clicks | Number | redirect counter |
-| ttl | Number | expiration timestamp |
+| Attribute | Type        | Description          |
+| --------- | ----------- | -------------------- |
+| shortCode | String (PK) | unique short link    |
+| longUrl   | String      | original URL         |
+| createdAt | String      | timestamp            |
+| clicks    | Number      | redirect counter     |
+| ttl       | Number      | expiration timestamp |
 
 TTL automatically deletes expired links.
 
@@ -136,6 +144,7 @@ TTL automatically deletes expired links.
 ## 📊 Observability
 
 ### API Gateway Access Logs
+
 CloudWatch logs include:
 
 - requestId
@@ -145,6 +154,7 @@ CloudWatch logs include:
 - client IP
 
 ### Lambda Logs
+
 Lambda execution logs are stored in CloudWatch for debugging and tracing.
 
 ---
