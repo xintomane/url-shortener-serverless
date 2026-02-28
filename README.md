@@ -8,6 +8,8 @@ This project demonstrates cloud‑native architecture, observability, and scalab
 
 ## 🏗 Architecture
 
+## 🏗 Architecture
+
 ```mermaid
 graph TB
   subgraph Client
