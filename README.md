@@ -104,10 +104,6 @@ HTTP/2 302
 Location: https://google.com
 ```
 
-### cURL Test (Create + Redirect)
-
-![Curl Test](docs/curl-demo.png)
-
 ## 🗄 DynamoDB Schema
 
 **Table:** `ShortUrls`
