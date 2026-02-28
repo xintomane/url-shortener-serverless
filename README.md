@@ -4,14 +4,9 @@ A serverless URL shortener built using **Amazon API Gateway, AWS Lambda, and Dyn
 
 This project demonstrates cloud‑native architecture, observability, and scalable design using AWS managed services.
 
----
-
 ## 🏗 Architecture
 
-````md
-## 🏗 Architecture
-
-```mermaid
+````mermaid
 graph TB
     subgraph Client
         C[Client / Browser]
@@ -49,8 +44,6 @@ graph TB
     APIGW -. Access Logs .-> CW
     L1 -. Logs .-> CW
     L2 -. Logs .-> CW
-```
-````
 
 ---
 
@@ -86,7 +79,7 @@ graph TB
 
 ```json
 { "url": "https://google.com" }
-```
+````
 
 **Response**
 
